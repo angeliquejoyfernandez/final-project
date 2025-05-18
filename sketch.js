@@ -14,12 +14,12 @@ let randomMode = false;
 
 let messages = [
   "💖 You are the beat",
-  "🎀 Glitch it louder",
+  "🎀 Get it Gurll",
   "🌈 Sound is your sparkle",
   "🫧 Bubble mode: activated",
-  "💥 You broke reality",
-  "👾 DJ of dreams",
-  "☁️ Soft chaos vibes",
+  "💥 Rave PLUR",
+  "👾 Best DJ eva",
+  "☁️ You're the new Illenium",
   "⭐ Remix your self",
   "🎧 Drop the cute beat",
   "🦄 Magic sound unlocked"
