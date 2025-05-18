@@ -14,15 +14,15 @@ let randomMode = false;
 
 let messages = [
   "💖 You are the beat",
-  "🎀 Get it Gurll",
-  "🌈 Sound is your sparkle",
-  "🫧 Bubble mode: activated",
-  "💥 Rave PLUR",
-  "👾 Best DJ eva",
-  "☁️ You're the new Illenium",
-  "⭐ Remix your self",
-  "🎧 Drop the cute beat",
-  "🦄 Magic sound unlocked"
+  " Get it Gurll",
+  " Sound is your sparkle",
+  " Bubble mode: activated",
+  " Rave PLUR",
+  " Best DJ eva",
+  " You're the new Illenium",
+  " Remix your self",
+  " Drop the cute beat",
+  " Magic sound unlocked"
 ];
 let currentMessage = "";
 let messageTimer = 0;
@@ -45,11 +45,13 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(640, 480);
-  video = createCapture(VIDEO);
-  video.size(640, 480);
-  video.hide();
-
+    createCanvas(640, 480); // Fixed size again — back to normal!
+  
+    video = createCapture(VIDEO);
+    video.size(640, 480);
+    video.hide();
+  
+    getAudioContext().resume(); // Still needed for mobile!
   recorder = new p5.SoundRecorder();
   soundFile = new p5.SoundFile();
   recorder.setInput();
@@ -98,8 +100,7 @@ function setup() {
       randomMode ? "🎲 Random Effects: ON" : "🎲 Random Effects: OFF";
   });
 
-  // Upload custom song
-  document.getElementById('uploadSong').addEventListener('change', function (e) {
+  document.getElementById('uploadSong').addEventListener('change', e => {
     let file = e.target.files[0];
     if (file) {
       userSong = loadSound(URL.createObjectURL(file), () => {
@@ -110,7 +111,6 @@ function setup() {
     }
   });
 
-  // Play/Pause user song
   document.getElementById('pauseUserSongBtn').addEventListener('click', () => {
     if (userSong && userSong.isPlaying()) {
       userSong.pause();
@@ -122,8 +122,7 @@ function setup() {
   });
 
   document.getElementById('userVolumeSlider').addEventListener('input', e => {
-    let vol = parseFloat(e.target.value);
-    if (userSong) userSong.setVolume(vol);
+    if (userSong) userSong.setVolume(parseFloat(e.target.value));
   });
 
   document.querySelectorAll('.pad').forEach(btn => {
@@ -135,7 +134,7 @@ function setup() {
 }
 
 function draw() {
-  image(video, 0, 0);
+  image(video, 0, 0, width, height);
   applyEffect();
 
   fill(255, 200, 255, 100);
@@ -175,6 +174,7 @@ function applyEffect() {
   }
 }
 
+
 function keyPressed() {
   triggerSound(key.toUpperCase());
 }
@@ -206,4 +206,3 @@ function spawnVisuals() {
     b: random(200, 255)
   });
 }
-
