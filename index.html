@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Be Your Own DJ: Remix the Self</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/addons/p5.sound.min.js"></script>
+</head>
+
+<body>
+  <div class="emoji-banner">
+    <span class="emoji-left">☁️⭐☁️</span>
+    <h1>Be Your Own DJ Bubble</h1>
+    <span class="emoji-right">⭐☁️⭐</span>
+  </div>
+  <p>Remix identity with sound, motion, and color</p>
+
+  <div id="padContainer">
+    <button class="pad" data-key="A">A</button>
+    <button class="pad" data-key="S">S</button>
+    <button class="pad" data-key="D">D</button>
+    <button class="pad" data-key="F">F</button>
+    <button class="pad" data-key="G">G</button>
+    <button class="pad" data-key="H">H</button>
+    <button class="pad" data-key="J">J</button>
+    <button class="pad" data-key="K">K</button>
+    <button class="pad" data-key="L">L</button>
+    <button class="pad" data-key="Z">Z</button>
+    <button class="pad" data-key="X">X</button>
+    <button class="pad" data-key="C">C</button>
+  </div>
+
+  <div id="controls">
+    <button id="screenshotBtn">📷 Save Screenshot</button>
+    <button id="recordBtn">⏺️ Start Recording</button>
+    <button id="saveBtn" disabled>💾 Save Beat</button>
+    <div id="liveLabel">🔴 LIVE</div>
+    <br />
+    <label for="volumeSlider">🔊 Volume:</label>
+    <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1">
+    <br />
+    <button id="glitchBtn">🎛️ Camera Effect</button>
+    <button id="toggleRandomBtn">🎲 Random Effects: OFF</button>
+    <br />
+    <label for="uploadSong">🎶 Add Your Own Song (.mp4 or .mp3):</label>
+    <input type="file" id="uploadSong" accept="audio/*,video/*">
+    <div id="userSongControls" style="display: none;">
+      <button id="pauseUserSongBtn">⏸️ Pause Song</button>
+      <label for="userVolumeSlider">🔉 Song Volume:</label>
+      <input type="range" id="userVolumeSlider" min="0" max="1" step="0.01" value="1">
+    </div>
+  </div>
+
+  <img id="djDeck" src="assets/dj-deck.png" alt="DJ Deck">
+
+  <script src="sketch.js"></script>
+</body>
+</html>
