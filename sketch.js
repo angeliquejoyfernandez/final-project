@@ -16,13 +16,13 @@ let messages = [
   "💖 You are the beat",
   "🎀 Glitch it louder",
   "🌈 Sound is your sparkle",
-  "🪧 Bubble mode: activated",
+  "🫧 Bubble mode: activated",
   "💥 You broke reality",
   "👾 DJ of dreams",
   "☁️ Soft chaos vibes",
-  "⭐️ Remix your self",
+  "⭐ Remix your self",
   "🎧 Drop the cute beat",
-  "🧘‍♀️ Magic sound unlocked"
+  "🦄 Magic sound unlocked"
 ];
 let currentMessage = "";
 let messageTimer = 0;
@@ -45,12 +45,10 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(windowWidth, windowHeight / 2);
+  createCanvas(640, 480);
   video = createCapture(VIDEO);
-  video.size(width, height);
+  video.size(640, 480);
   video.hide();
-
-  getAudioContext().resume();
 
   recorder = new p5.SoundRecorder();
   soundFile = new p5.SoundFile();
@@ -58,7 +56,9 @@ function setup() {
 
   noStroke();
 
-  document.getElementById('screenshotBtn').addEventListener('click', () => saveCanvas('dj-artwork', 'png'));
+  document.getElementById('screenshotBtn').addEventListener('click', () => {
+    saveCanvas('dj-artwork', 'png');
+  });
 
   document.getElementById('recordBtn').addEventListener('click', () => {
     if (!isRecording) {
@@ -76,11 +76,15 @@ function setup() {
     }
   });
 
-  document.getElementById('saveBtn').addEventListener('click', () => soundFile.save('your-beat'));
+  document.getElementById('saveBtn').addEventListener('click', () => {
+    soundFile.save('your-beat');
+  });
 
   document.getElementById('volumeSlider').addEventListener('input', e => {
-    const vol = parseFloat(e.target.value);
-    for (let key in sounds) sounds[key].setVolume(vol);
+    let vol = parseFloat(e.target.value);
+    for (let key in sounds) {
+      sounds[key].setVolume(vol);
+    }
     if (userSong) userSong.setVolume(vol);
   });
 
@@ -90,10 +94,12 @@ function setup() {
 
   document.getElementById('toggleRandomBtn').addEventListener('click', () => {
     randomMode = !randomMode;
-    document.getElementById('toggleRandomBtn').textContent = randomMode ? "🎲 Random Effects: ON" : "🎲 Random Effects: OFF";
+    document.getElementById('toggleRandomBtn').textContent =
+      randomMode ? "🎲 Random Effects: ON" : "🎲 Random Effects: OFF";
   });
 
-  document.getElementById('uploadSong').addEventListener('change', e => {
+  // Upload custom song
+  document.getElementById('uploadSong').addEventListener('change', function (e) {
     let file = e.target.files[0];
     if (file) {
       userSong = loadSound(URL.createObjectURL(file), () => {
@@ -104,6 +110,7 @@ function setup() {
     }
   });
 
+  // Play/Pause user song
   document.getElementById('pauseUserSongBtn').addEventListener('click', () => {
     if (userSong && userSong.isPlaying()) {
       userSong.pause();
@@ -115,16 +122,20 @@ function setup() {
   });
 
   document.getElementById('userVolumeSlider').addEventListener('input', e => {
-    if (userSong) userSong.setVolume(parseFloat(e.target.value));
+    let vol = parseFloat(e.target.value);
+    if (userSong) userSong.setVolume(vol);
   });
 
   document.querySelectorAll('.pad').forEach(btn => {
-    btn.addEventListener('click', () => triggerSound(btn.dataset.key));
+    btn.addEventListener('click', () => {
+      const key = btn.dataset.key;
+      triggerSound(key);
+    });
   });
 }
 
 function draw() {
-  image(video, 0, 0, width, height);
+  image(video, 0, 0);
   applyEffect();
 
   fill(255, 200, 255, 100);
@@ -164,10 +175,6 @@ function applyEffect() {
   }
 }
 
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight / 2);
-}
-
 function keyPressed() {
   triggerSound(key.toUpperCase());
 }
@@ -176,7 +183,10 @@ function triggerSound(k) {
   if (sounds[k]) {
     sounds[k].play();
     spawnVisuals();
-    if (randomMode) currentEffect = random(glitchEffects);
+
+    if (randomMode) {
+      currentEffect = random(glitchEffects);
+    }
 
     const btn = document.querySelector(`.pad[data-key="${k}"]`);
     if (btn) {
@@ -196,5 +206,4 @@ function spawnVisuals() {
     b: random(200, 255)
   });
 }
-
 
