@@ -13,16 +13,16 @@ let currentEffect = 'THRESHOLD';
 let randomMode = false;
 
 let messages = [
-  "💖 You are the beat",
-  " Get it Gurll",
-  " Sound is your sparkle",
-  " Bubble mode: activated",
-  " Rave PLUR",
-  " Best DJ eva",
-  " You're the new Illenium",
-  " Remix your self",
-  " Drop the cute beat",
-  " Magic sound unlocked"
+ "💖 You are the beat",
+  "🎀 Get it Gurl",
+  "🌈 Sound is your sparkle",
+  "🫧 Bubble mode: activated",
+  "💥 New Rave!",
+  "👾 DJ of dreams",
+  "☁️ Soft chaos vibes",
+  "⭐ Remix your self",
+  "🎧 PLUR LOl",
+  "🦄 Magic sound unlocked"
 ];
 let currentMessage = "";
 let messageTimer = 0;
