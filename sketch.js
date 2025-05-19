@@ -45,13 +45,15 @@ function preload() {
 }
 
 function setup() {
-    createCanvas(640, 480); // Fixed size again — back to normal!
-  
-    video = createCapture(VIDEO);
-    video.size(640, 480);
-    video.hide();
-  
-    getAudioContext().resume(); // Still needed for mobile!
+  let canvas = createCanvas(640, 480);
+  canvas.parent("canvasContainer");
+
+  video = createCapture(VIDEO);
+  video.size(640, 480);
+  video.hide();
+
+  getAudioContext().resume();
+
   recorder = new p5.SoundRecorder();
   soundFile = new p5.SoundFile();
   recorder.setInput();
@@ -174,7 +176,6 @@ function applyEffect() {
   }
 }
 
-
 function keyPressed() {
   triggerSound(key.toUpperCase());
 }
@@ -206,3 +207,4 @@ function spawnVisuals() {
     b: random(200, 255)
   });
 }
+
